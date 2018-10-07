@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Edna Mall</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="action_add_favourite">Add to Favourites</string>
+    <string name="action_play_next">Play Video</string>
+    <string name="backdrop_title">LOVE Video</string>
+    <string name="backdrop_subtitle">Now Showing top 10 </string>
+    <string name="title_activity_comming">Movies Comming Soon To Edna</string>
+    <string name="title_activity_nowshowing">Movies Now Showing at Edna mall</string>
+    <string name="title_activity_detail">Movies Detail</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+</resources>
