@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -35,6 +36,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CommingActivity extends AppCompatActivity {
 
@@ -45,6 +48,25 @@ String url ="http://ednamall.co/api/getcommingsoons.php";
     private AlbumsAdapter adapter;
     private List<Album> albumList;
     public Animation animBounce;
+
+
+
+    private static final Pattern REGEX_PATTERN =
+            Pattern.compile("(?<=src=\")[^\"]*(?<!\")");
+
+
+    public static String getVidioid(String input) {
+        REGEX_PATTERN.matcher(input).matches();
+        Matcher matcher = REGEX_PATTERN.matcher(input);
+        while (matcher.find()) {
+            return matcher.group();
+        }
+
+        return "";
+    }
+
+
+
 
     private void getData() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -68,9 +90,24 @@ String url ="http://ednamall.co/api/getcommingsoons.php";
                         movie.setShortDescription(jsonObject.getString("short_disc"));
                         movie.setLongDescription(jsonObject.getString("description"));
 
+String videoId="";
+                        try{
+                            String s = getVidioid(jsonObject.getString("youtubelink"));
+                             videoId = s.split("/embed/")[1];
+                            Toast.makeText(getApplicationContext(),videoId,Toast.LENGTH_LONG).show();
 
+
+                        }catch (Exception ex){
+
+                            Log.e("Error on Video ",ex.getMessage());
+
+
+
+
+                        }
+
+                        movie.setVideo(videoId);
                         albumList.add(movie);
-
 
                         adapter.notifyDataSetChanged();
 

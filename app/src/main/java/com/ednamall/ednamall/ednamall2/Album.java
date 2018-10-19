@@ -61,7 +61,7 @@ public class Album {
     }
 
     public void setVideo(String video) {
-        this.shortDescription = video;
+        this.video = video;
     }
 
 
