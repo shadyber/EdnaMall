@@ -85,6 +85,8 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
                 detail.putExtra("movieId",album.getMovieid());
                 detail.putExtra("video",album.getVideo());
                 detail.putExtra("image",album.getThumbnail());
+                detail.putExtra("gener",album.getgeners());
+                detail.putExtra("cast",album.getCasts());
                 mContext.startActivity(detail);
             }
         });

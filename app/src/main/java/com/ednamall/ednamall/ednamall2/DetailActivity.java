@@ -36,8 +36,10 @@ private  String title="";
 private  String shortDisc="";
 private  String description="";
 private String movieid="";
+private String cast="";
+private  String gener="";
 
-TextView txtdetail,txttitle;
+TextView txtdetail,txttitle,txtcast,txtgener;
 
 
 
@@ -74,6 +76,8 @@ try {
     title=getIntent().getStringExtra("title");
     description=getIntent().getStringExtra("description");
     shortDisc=getIntent().getStringExtra("short_disc");
+    cast=getIntent().getStringExtra("cast");
+    gener=getIntent().getStringExtra("gener");
 }catch(Exception ex){
     Log.e("Error on Intent : ",ex.getMessage());
 
@@ -89,6 +93,10 @@ try {
 
 txtdetail=findViewById(R.id.txtdetail);
 txtdetail.setText(description);
+
+
+txtcast=findViewById(R.id.txtcast);
+txtcast.setText(cast);
 
 
         txttitle=findViewById(R.id.txttitle);

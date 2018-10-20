@@ -69,70 +69,125 @@ public class NowshowingActivity extends AppCompatActivity {
 
 
 
-    private void getData() {
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                Log.e("Response : ", String.valueOf(response));
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(i);
+    private void getofflineData() throws JSONException {
+        FileManager fileManager = new FileManager();
+        String stringfile = fileManager.readFromFile("nowshowing.dat", getApplicationContext());
+        JSONArray response = new JSONArray(stringfile);
 
-                        Album movie = new Album();
-                        movie.setName(jsonObject.getString("titiel"));
-                        movie.setGeners(jsonObject.getString("geners"));
-                        movie.setThumbnail(jsonObject.getString("image"));
-                        movie.setCasts(jsonObject.getString("casts"));
-                        movie.setDirector(jsonObject.getString("director"));
-                        movie.setShortDescription(jsonObject.getString("short_disc"));
-                        movie.setLongDescription(jsonObject.getString("description"));
+        for (int i = 0; i < response.length(); i++) {
+            try {
+                JSONObject jsonObject = response.getJSONObject(i);
+
+                Album movie = new Album();
+                movie.setName(jsonObject.getString("titiel"));
+                movie.setGeners(jsonObject.getString("geners"));
+                movie.setThumbnail(jsonObject.getString("image"));
+                movie.setCasts(jsonObject.getString("casts"));
+                movie.setDirector(jsonObject.getString("director"));
+                movie.setShortDescription(jsonObject.getString("short_disc"));
+                movie.setLongDescription(jsonObject.getString("description"));
 
 
-                        String videoId="";
-                        try{
-                            String s = getVidioid(jsonObject.getString("youtubelink"));
-                            videoId = s.split("/embed/")[1];
-                            Toast.makeText(getApplicationContext(),videoId,Toast.LENGTH_LONG).show();
+                String videoId = "";
+                try {
+                    String s = getVidioid(jsonObject.getString("youtubelink"));
+                    videoId = s.split("/embed/")[1];
 
 
-                        }catch (Exception ex){
+                } catch (Exception ex) {
 
-                            Log.e("Error on Video ",ex.getMessage());
-
-
+                    Log.e("Error on Video ", ex.getMessage());
 
 
-                        }
-
-                        movie.setVideo(videoId);
-                        albumList.add(movie);
-      adapter.notifyDataSetChanged();
-
-                    } catch (JSONException e) {
-                        Log.e("Json Exception : ",e.getMessage());
-                        e.printStackTrace();
-                        progressDialog.dismiss();
-                    }
                 }
-                adapter.notifyDataSetChanged();
-                progressDialog.dismiss();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Volley Error : ", error.toString());
-                progressDialog.dismiss();
-            }
-        });
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.getCache();
-        requestQueue.add(jsonArrayRequest);
-    }
 
+                movie.setVideo(videoId);
+                albumList.add(movie);
+                adapter.notifyDataSetChanged();
+
+            } catch (JSONException e) {
+                Log.e("Json Exception : ", e.getMessage());
+                e.printStackTrace();
+
+            }
+            adapter.notifyDataSetChanged();
+
+
+        }
+
+
+    }
+        private void getData() {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
+
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    Log.e("Response : ", String.valueOf(response));
+                    FileManager fileManager = new FileManager();
+                    fileManager.writeToFile("nowshowing.dat", String.valueOf(response), getApplicationContext());
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject jsonObject = response.getJSONObject(i);
+
+                            Album movie = new Album();
+                            movie.setName(jsonObject.getString("titiel"));
+                            movie.setGeners(jsonObject.getString("geners"));
+                            movie.setThumbnail(jsonObject.getString("image"));
+                            movie.setCasts(jsonObject.getString("casts"));
+                            movie.setDirector(jsonObject.getString("director"));
+                            movie.setShortDescription(jsonObject.getString("short_disc"));
+                            movie.setLongDescription(jsonObject.getString("description"));
+
+
+                            String videoId = "";
+                            try {
+                                String s = getVidioid(jsonObject.getString("youtubelink"));
+                                videoId = s.split("/embed/")[1];
+
+
+                            } catch (Exception ex) {
+
+                                Log.e("Error on Video ", ex.getMessage());
+
+
+                            }
+
+                            movie.setVideo(videoId);
+                            albumList.add(movie);
+                            adapter.notifyDataSetChanged();
+
+                        } catch (JSONException e) {
+                            Log.e("Json Exception : ", e.getMessage());
+                            e.printStackTrace();
+                            progressDialog.dismiss();
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                    progressDialog.dismiss();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    try {
+                        getofflineData();
+                    } catch (JSONException e) {
+                        //e.printStackTrace();
+                    }
+                    Log.e("Volley Error : ", error.toString());
+                    progressDialog.dismiss();
+
+
+
+                }
+            });
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.getCache();
+            requestQueue.add(jsonArrayRequest);
+        }
 
 
 
