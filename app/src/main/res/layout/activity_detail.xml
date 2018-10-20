@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
 
+
     <ImageView
         android:id="@+id/imageposter"
         android:layout_width="0dp"
@@ -20,9 +21,9 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="500dp"
         android:layout_marginBottom="8dp"
-        android:alpha="0.2"
+        android:alpha="0.35"
         android:background="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +72,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Gener"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/txtcast"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Rating"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/txtgener"
         app:layout_constraintEnd_toStartOf="@+id/txtlength"
@@ -103,7 +102,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Cast"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/txttitle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -116,7 +114,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="12dp"
-        android:text="Length"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/txtgener"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -137,6 +134,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="title" />
+
+    <ImageView
+        android:id="@+id/imagepostertop"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="3dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorAccent"
+        android:contentDescription="Small Poster"
+        android:padding="3dp"
+        android:src="@drawable/placeholder"
+        app:layout_constraintBottom_toTopOf="@+id/imageposter"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.youtube.player.YouTubePlayerView
         android:id="@+id/youtube_view"

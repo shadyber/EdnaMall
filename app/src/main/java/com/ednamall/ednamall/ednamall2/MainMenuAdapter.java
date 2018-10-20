@@ -39,7 +39,9 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.MyView
             count = (TextView) view.findViewById(R.id.count);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
             overflow = (ImageView) view.findViewById(R.id.overflow);
+
         }
+
     }
 
     public MainMenuAdapter(Context mContext, List<MainMenu> menuList) {
@@ -94,7 +96,7 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.MyView
                 .into(holder.thumbnail);
 
 
-
+holder.overflow.setVisibility(View.INVISIBLE);
         setAnimation(holder.itemView, position);
 
 holder.thumbnail.setOnClickListener(new View.OnClickListener() {
@@ -110,11 +112,11 @@ holder.thumbnail.setOnClickListener(new View.OnClickListener() {
          mContext.startActivity(intenetnow);
          return;
      case 2:
-         Intent intent7d =new Intent(mContext,NowshowingActivity.class);
+         Intent intent7d =new Intent(mContext,SevenDActivity.class);
          mContext.startActivity(intent7d);
          return;
      case 3:
-         Intent intentgames =new Intent(mContext,NowshowingActivity.class);
+         Intent intentgames =new Intent(mContext,BongosActivity.class);
          mContext.startActivity(intentgames);
          return;
      case 4:

@@ -45,7 +45,25 @@
         </activity>
         <activity
             android:name=".DetailActivity"
-            android:label="@string/title_activity_detail"></activity>
+            android:label="@string/title_activity_detail" />
+        <activity
+            android:name=".SevenDActivity"
+            android:label="@string/title_activity_seven_d"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ednamall.ednamall.ednamall2.MainActivity" />
+        </activity>
+        <activity
+            android:name=".BongosActivity"
+            android:label="@string/title_activity_bongos"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ednamall.ednamall.ednamall2.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

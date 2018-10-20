@@ -68,6 +68,7 @@ private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ImageView imageposter=findViewById(R.id.imageposter);
+        ImageView imagepostertop=findViewById(R.id.imagepostertop);
 
 
 try {
@@ -90,6 +91,9 @@ try {
                     .error(R.drawable.ednamall).resize(110, 110).centerCrop()
                     .into(imageposter);
 
+        Picasso.with(getApplicationContext()).load(image).placeholder(R.drawable.placeholder)// Place holder image from drawable folder
+                .error(R.drawable.placeholder).resize(110, 110).centerCrop()
+                .into(imagepostertop);
 
 txtdetail=findViewById(R.id.txtdetail);
 txtdetail.setText(description);
