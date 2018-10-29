@@ -50,13 +50,16 @@ private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemS
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-
+Intent home=new Intent(DetailActivity.this,MainActivity.class);
+startActivity(home);
                     return true;
                 case R.id.navigation_dashboard:
-
+                    Intent nowshow=new Intent(DetailActivity.this,NowshowingActivity.class);
+                    startActivity(nowshow);
                     return true;
                 case R.id.navigation_notifications:
-
+                    Intent comming=new Intent(DetailActivity.this,CommingActivity.class);
+                    startActivity(comming);
                     return true;
             }
             return false;

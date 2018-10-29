@@ -1,6 +1,7 @@
 package com.ednamall.ednamall.ednamall2;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -70,7 +71,7 @@ String url ="http://ednamall.co/api/getcommingsoons.php";
 
     private void getofflineData() throws JSONException {
         FileManager fileManager = new FileManager();
-        String stringfile = fileManager.readFromFile("coming.dat", getApplicationContext());
+        String stringfile = fileManager.readFromFile("commming.dat", getApplicationContext());
         JSONArray response = new JSONArray(stringfile);
 
         for (int i = 0; i < response.length(); i++) {
@@ -126,7 +127,7 @@ String url ="http://ednamall.co/api/getcommingsoons.php";
             public void onResponse(JSONArray response) {
                 Log.e("Response : ", String.valueOf(response));
                 FileManager fileManager = new FileManager();
-                fileManager.writeToFile("coming.dat", String.valueOf(response), getApplicationContext());
+                fileManager.writeToFile("commming.dat", String.valueOf(response), getApplicationContext());
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
@@ -238,8 +239,13 @@ String url ="http://ednamall.co/api/getcommingsoons.php";
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                String shareBody = "Downlolad Edna Mall app From Google Play  : https://play.google.com/store/apps/details?id=com.ednamall.ednamall.ednamall2&hl=en";
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Get Edna Mall App From Google Play ");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(sharingIntent, "Share This Massage Using "));
+
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

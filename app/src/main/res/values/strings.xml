@@ -11,18 +11,19 @@
     <string name="action_play_next">Play Video</string>
     <string name="backdrop_title">LOVE Video</string>
     <string name="backdrop_subtitle">Now Showing top 10 </string>
-    <string name="title_activity_comming">Movies Comming Soon To Edna</string>
+    <string name="title_activity_comming">Movies Coming Soon  To Edna</string>
     <string name="title_activity_nowshowing">Movies Now Showing at Edna mall</string>
     <string name="title_activity_detail">Movies Detail</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="comming_soon">Movies Coming Soon</string>
+    <string name="comming_soon">Movies Coming Soon </string>
     <string name="todo">TODO</string>
     <string name="player_error">Error initializing YouTube player: %s</string>
     <string name="seek_to">Jump To</string>
     <string name="seek_to_hint">Seconds</string>
     <string name="title_activity_seven_d">Edna Mall 7D Simulation</string>
     <string name="title_activity_bongos">Edna Mall Bob and Bongos</string>
+    <string name="title_activity_contact">Contact Us</string>
 
 </resources>

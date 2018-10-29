@@ -119,12 +119,9 @@ holder.thumbnail.setOnClickListener(new View.OnClickListener() {
          Intent intentgames =new Intent(mContext,BongosActivity.class);
          mContext.startActivity(intentgames);
          return;
+
      case 4:
-         Intent intentshops =new Intent(mContext,NowshowingActivity.class);
-         mContext.startActivity(intentshops);
-         return;
-     case 5:
-         Intent intentcontact =new Intent(mContext,NowshowingActivity.class);
+         Intent intentcontact =new Intent(mContext,ContactActivity.class);
          mContext.startActivity(intentcontact);
  default:
 return;

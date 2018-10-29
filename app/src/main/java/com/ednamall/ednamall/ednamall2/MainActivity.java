@@ -1,5 +1,6 @@
 package com.ednamall.ednamall.ednamall2;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -33,12 +34,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
-/*
-    private RecyclerView recyclerView;
-    private AlbumsAdapter adapter;
-    private List<Album> albumList;
 
-*/
 
     public Animation animBounce;
 private RecyclerView recyclerView;
@@ -53,17 +49,6 @@ private RecyclerView recyclerView;
         setSupportActionBar(toolbar);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-/*
-        albumList = new ArrayList<>();
-        adapter = new AlbumsAdapter(this, albumList);
-
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-*/
-
 
         menuList = new ArrayList<>();
         adapter = new MainMenuAdapter(this, menuList);
@@ -149,9 +134,36 @@ ImageView imgbanner=findViewById(R.id.imgbanner);
 
         if (id == R.id.nav_nowshow) {
             // Handle the camera action
+            Intent nowshowing=new Intent(MainActivity.this,NowshowingActivity.class);
+            startActivity(nowshowing);
+            return true;
+        }else if (id == R.id.nav_comming) {
+            Intent comming=new Intent(MainActivity.this,CommingActivity.class);
+            startActivity(comming);
+            return true;
+        } else if (id == R.id.nav_Games) {
+            Intent bongos=new Intent(MainActivity.this,BongosActivity.class);
+            startActivity(bongos);
+            return true;
+        } else if (id == R.id.nav_7d) {
+            Intent sd=new Intent(MainActivity.this,SevenDActivity.class);
+            startActivity(sd);
+            return true;
         } else if (id == R.id.nav_share) {
+           String shareBody = "Downlolad Edna Mall app From Google Play  : https://play.google.com/store/apps/details?id=com.ednamall.ednamall.ednamall2&hl=en";
+          Intent  sharingIntent = new Intent(Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Get Edna Mall App From Google Play ");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(sharingIntent, "Share This Massage Using "));
 
         } else if (id == R.id.nav_send) {
+            String shareBody = "Downlolad Edna Mall app From Google Play  : https://play.google.com/store/apps/details?id=com.ednamall.ednamall.ednamall2&hl=en";
+            Intent  sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Get Edna Mall App From Google Play ");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(sharingIntent, "Share This Massage Using "));
 
         }
 
@@ -170,7 +182,6 @@ ImageView imgbanner=findViewById(R.id.imgbanner);
                 R.drawable.nowshowing,
                 R.drawable.sevend,
                 R.drawable.bongos,
-                R.drawable.shopes,
                 R.drawable.ednamall};
 
         MainMenu a = new MainMenu("Coming Soon",  covers[0]);
@@ -185,11 +196,7 @@ ImageView imgbanner=findViewById(R.id.imgbanner);
          a = new MainMenu("Games",  covers[3]);
         menuList.add(a);
 
-
-        a = new MainMenu("Shops and Offices",  covers[4]);
-        menuList.add(a);
-
-        a = new MainMenu("Contact US",  covers[5]);
+        a = new MainMenu("Contact US",  covers[4]);
         menuList.add(a);
 
         adapter.notifyDataSetChanged();

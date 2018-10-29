@@ -1,6 +1,7 @@
 package com.ednamall.ednamall.ednamall2;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Build;
@@ -152,7 +153,7 @@ public class NowshowingActivity extends AppCompatActivity {
                             } catch (Exception ex) {
 
                                 Log.e("Error on Video ", ex.getMessage());
-
+getofflineData();
 
                             }
 
@@ -162,7 +163,7 @@ public class NowshowingActivity extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             Log.e("Json Exception : ", e.getMessage());
-                            e.printStackTrace();
+
                             progressDialog.dismiss();
                         }
                     }
@@ -236,8 +237,13 @@ txttitle.setText("Now Showing at Edna Mall");
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                String shareBody = "Downlolad Edna Mall app From Google Play  : https://play.google.com/store/apps/details?id=com.ednamall.ednamall.ednamall2&hl=en";
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Get Edna Mall App From Google Play ");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(sharingIntent, "Share This Massage Using "));
+
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

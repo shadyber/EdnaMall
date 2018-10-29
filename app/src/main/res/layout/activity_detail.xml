@@ -140,7 +140,6 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="3dp"
-        android:layout_marginEnd="8dp"
         android:background="@color/colorAccent"
         android:contentDescription="Small Poster"
         android:padding="3dp"
