@@ -48,7 +48,7 @@
     <TextView
         android:id="@+id/txtdetail"
         android:layout_width="0dp"
-        android:layout_height="49dp"
+        android:layout_height="93dp"
         android:layout_margin="8dp"
         android:layout_marginStart="64dp"
         android:layout_marginLeft="8dp"

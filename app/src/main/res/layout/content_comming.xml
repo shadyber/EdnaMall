@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".CommingActivity"
     tools:showIn="@layout/activity_comming">
@@ -12,12 +13,12 @@
         android:id="@+id/imgbanner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/todo"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/shopes"
-        android:contentDescription="@string/todo" />
+        app:srcCompat="@drawable/shopes" />
 
     <TextView
         android:id="@+id/txtwelcome"

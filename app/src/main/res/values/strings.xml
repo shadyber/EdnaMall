@@ -25,5 +25,7 @@
     <string name="title_activity_seven_d">Edna Mall 7D Simulation</string>
     <string name="title_activity_bongos">Edna Mall Bob and Bongos</string>
     <string name="title_activity_contact">Contact Us</string>
+    <string name="action_about">About Us</string>
+    <string name="action_share">Share App</string>
 
 </resources>

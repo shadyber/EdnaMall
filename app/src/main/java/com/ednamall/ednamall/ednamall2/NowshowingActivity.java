@@ -39,6 +39,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import co.ednamall.ednamall.ednamall2.R;
+
 public class NowshowingActivity extends AppCompatActivity {
 
 
@@ -138,6 +140,8 @@ public class NowshowingActivity extends AppCompatActivity {
                             movie.setName(jsonObject.getString("titiel"));
                             movie.setGeners(jsonObject.getString("geners"));
                             movie.setThumbnail(jsonObject.getString("image"));
+                            movie.setThumbnail_big(jsonObject.getString("image_big"));
+
                             movie.setCasts(jsonObject.getString("casts"));
                             movie.setDirector(jsonObject.getString("director"));
                             movie.setShortDescription(jsonObject.getString("short_disc"));

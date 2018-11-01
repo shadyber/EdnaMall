@@ -8,7 +8,7 @@
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/nowshowing"
+        android:icon="@drawable/now"
         android:title="@string/title_activity_nowshowing" />
 
     <item

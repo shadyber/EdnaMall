@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import co.ednamall.ednamall.ednamall2.R;
+
 public class ContactActivity extends AppCompatActivity {
 
 
@@ -34,8 +36,26 @@ public class ContactActivity extends AppCompatActivity {
 
     }
 
+    public void requestVIber(View vIew){
+        Intent smsIntent = new Intent(Intent.ACTION_SENDTO,
+                Uri.parse("sms:+251942131313"));
+        smsIntent.putExtra("sms_body", "Add Me to Viber List ");
+        startActivity(smsIntent);
+    }
+
     public void joinFacebook(View vIew){
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/ednamatticinema")));
+Intent intent;
+String pageId="396510150414130";
+        try {
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/" + pageId));
+            startActivity(intent);
+        } catch (Exception e) {
+            intent =  new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/ednamatticinema"));
+            startActivity(intent);
+        }
+
+
+      //   startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.m.facebook.com/ednamatticinema")));
 
     }
 

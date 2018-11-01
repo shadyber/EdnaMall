@@ -19,6 +19,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import co.ednamall.ednamall.ednamall2.R;
+
 /**
  * Created by Ravi Tamada on 18/05/16.
  */

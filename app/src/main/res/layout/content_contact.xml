@@ -89,6 +89,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@drawable/viber_btn"
+        android:onClick="requestVIber"
         android:text="Viber"
         app:layout_constraintEnd_toStartOf="@+id/btnfacebook"
         app:layout_constraintStart_toEndOf="@+id/btntelegram"

@@ -1,6 +1,7 @@
 package com.ednamall.ednamall.ednamall2;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -25,6 +26,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import co.ednamall.ednamall.ednamall2.R;
 
 public class DetailActivity  extends YouTubeBaseActivity  {
 
@@ -70,8 +73,8 @@ startActivity(home);
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        ImageView imageposter=findViewById(R.id.imageposter);
-        ImageView imagepostertop=findViewById(R.id.imagepostertop);
+        final ImageView imageposter=findViewById(R.id.imageposter);
+        final ImageView imagepostertop=findViewById(R.id.imagepostertop);
 
 
 try {
@@ -89,6 +92,8 @@ try {
 
 
 
+
+
         if (!image.equalsIgnoreCase(""))
             Picasso.with(getApplicationContext()).load(image).placeholder(R.drawable.ednamall)// Place holder image from drawable folder
                     .error(R.drawable.ednamall).resize(110, 110).centerCrop()
@@ -97,6 +102,17 @@ try {
         Picasso.with(getApplicationContext()).load(image).placeholder(R.drawable.placeholder)// Place holder image from drawable folder
                 .error(R.drawable.placeholder).resize(110, 110).centerCrop()
                 .into(imagepostertop);
+
+        imagepostertop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String s=image;
+
+                Intent ii=new Intent(DetailActivity.this, FullScreenImageActivity.class);
+                ii.putExtra("image", s);
+                startActivity(ii);
+            }
+        });
 
 txtdetail=findViewById(R.id.txtdetail);
 txtdetail.setText(description);

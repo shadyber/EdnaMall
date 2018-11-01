@@ -1,8 +1,12 @@
 package com.ednamall.ednamall.ednamall2;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -11,6 +15,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -27,13 +32,35 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import co.ednamall.ednamall.ednamall2.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
+
+
+    public static void sendAppItself(Activity paramActivity) throws IOException {
+        PackageManager pm = paramActivity.getPackageManager();
+        ApplicationInfo appInfo;
+        try {
+            appInfo = pm.getApplicationInfo(paramActivity.getPackageName(),
+                    PackageManager.GET_META_DATA);
+            Intent sendBt = new Intent(Intent.ACTION_SEND);
+            sendBt.setType("*/*");
+            sendBt.putExtra(Intent.EXTRA_STREAM,
+                    Uri.parse("file://" + appInfo.publicSourceDir));
+
+            paramActivity.startActivity(Intent.createChooser(sendBt,
+                    "Share Edna Mall App  using"));
+        } catch (PackageManager.NameNotFoundException e1) {
+            Log.e("Package Not Found: ",e1.getMessage());
+        }
+    }
 
 
     public Animation animBounce;
@@ -121,6 +148,17 @@ ImageView imgbanner=findViewById(R.id.imgbanner);
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }else  if (id == R.id.action_share) {
+            try {
+                sendAppItself(MainActivity.this);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }else if (id == R.id.action_about) {
+           Intent about=new Intent(MainActivity.this,AboutActivity.class);
+           startActivity(about);
+           return true;
         }
 
         return super.onOptionsItemSelected(item);

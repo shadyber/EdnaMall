@@ -7,6 +7,7 @@ public class Album {
     private String name;
     private String geners;
     private String thumbnail;
+    private String thumbnail_big;
     private int movieid;
     private String director;
     private  String casts;
@@ -113,4 +114,14 @@ public class Album {
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
     }
+
+
+    public String getThumbnail_big() {
+        return thumbnail_big;
+    }
+
+    public void setThumbnail_big(String thumbnail_big) {
+        this.thumbnail = thumbnail_big;
+    }
+
 }

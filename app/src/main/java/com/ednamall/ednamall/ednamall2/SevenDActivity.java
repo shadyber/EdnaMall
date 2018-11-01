@@ -38,6 +38,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import co.ednamall.ednamall.ednamall2.R;
+
 public class SevenDActivity extends AppCompatActivity {
 
     TextView txttitle;

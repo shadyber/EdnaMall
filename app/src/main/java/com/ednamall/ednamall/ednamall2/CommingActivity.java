@@ -40,6 +40,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import co.ednamall.ednamall.ednamall2.R;
+
 public class CommingActivity extends AppCompatActivity {
 
 String url ="http://ednamall.co/api/getcommingsoons.php";

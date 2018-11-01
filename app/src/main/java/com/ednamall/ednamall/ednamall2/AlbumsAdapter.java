@@ -18,6 +18,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import co.ednamall.ednamall.ednamall2.R;
+
 /**
  * Created by Ravi Tamada on 18/05/16.
  */
@@ -87,6 +89,7 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
                 detail.putExtra("image",album.getThumbnail());
                 detail.putExtra("gener",album.getgeners());
                 detail.putExtra("cast",album.getCasts());
+                detail.putExtra("image_big",album.getThumbnail_big());
                 mContext.startActivity(detail);
             }
         });
