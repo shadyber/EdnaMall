@@ -1,12 +1,10 @@
-package com.ednamall.ednamall.ednamall2;
+package com.ednamall.ednamall.edna;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-
-import co.ednamall.ednamall.ednamall2.R;
 
 public class AboutActivity extends AppCompatActivity {
 

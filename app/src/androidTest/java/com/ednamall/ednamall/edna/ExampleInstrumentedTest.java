@@ -1,4 +1,4 @@
-package com.ednamall.ednamall.ednamall2;
+package com.ednamall.ednamall.edna;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.ednamall.ednamall.ednamall2", appContext.getPackageName());
+        assertEquals("com.ednamall.ednamall.edna", appContext.getPackageName());
     }
 }

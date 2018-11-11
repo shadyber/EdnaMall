@@ -135,6 +135,15 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:text="title" />
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Full Screen Poster ->"
+        app:layout_constraintEnd_toStartOf="@+id/imagepostertop"
+        app:layout_constraintTop_toTopOf="@+id/imagepostertop" />
+
     <ImageView
         android:id="@+id/imagepostertop"
         android:layout_width="40dp"

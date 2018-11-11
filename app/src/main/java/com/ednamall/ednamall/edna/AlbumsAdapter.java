@@ -1,4 +1,4 @@
-package com.ednamall.ednamall.ednamall2;
+package com.ednamall.ednamall.edna;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +18,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import co.ednamall.ednamall.ednamall2.R;
 
 /**
  * Created by Ravi Tamada on 18/05/16.

@@ -1,4 +1,4 @@
-package com.ednamall.ednamall.ednamall2;
+package com.ednamall.ednamall.edna;
 
 import android.content.Context;
 import android.util.Log;

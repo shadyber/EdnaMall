@@ -1,22 +1,14 @@
-package com.ednamall.ednamall.ednamall2;
+package com.ednamall.ednamall.edna;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -24,10 +16,6 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.squareup.picasso.Picasso;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import co.ednamall.ednamall.ednamall2.R;
 
 public class DetailActivity  extends YouTubeBaseActivity  {
 
@@ -110,6 +98,7 @@ try {
 
                 Intent ii=new Intent(DetailActivity.this, FullScreenImageActivity.class);
                 ii.putExtra("image", s);
+                ii.putExtra("title",title);
                 startActivity(ii);
             }
         });

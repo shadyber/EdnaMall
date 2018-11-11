@@ -1,4 +1,4 @@
-package com.ednamall.ednamall.ednamall2;
+package com.ednamall.ednamall.edna;
 
 /**
  * Created by Lincoln on 18/05/16.

@@ -1,4 +1,4 @@
-package com.ednamall.ednamall.ednamall2;
+package com.ednamall.ednamall.edna;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -7,7 +7,6 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -38,14 +37,16 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import co.ednamall.ednamall.ednamall2.R;
 
-public class SevenDActivity extends AppCompatActivity {
+public class BongosActivity extends AppCompatActivity {
+
+
+
 
     TextView txttitle;
 
 
-    String url = "http://ednamall.co/api/get7d.php";
+    String url = "http://ednamall.co/api/getgames.php";
 
 
     private RecyclerView recyclerView;
@@ -71,7 +72,7 @@ public class SevenDActivity extends AppCompatActivity {
 
     private void getofflineData() throws JSONException {
         FileManager fileManager = new FileManager();
-        String stringfile = fileManager.readFromFile("sevend.dat", getApplicationContext());
+        String stringfile = fileManager.readFromFile("bongos.dat", getApplicationContext());
         JSONArray response = new JSONArray(stringfile);
 
         for (int i = 0; i < response.length(); i++) {
@@ -106,6 +107,7 @@ public class SevenDActivity extends AppCompatActivity {
 
             } catch (JSONException e) {
                 Log.e("Json Exception : ", e.getMessage());
+                e.printStackTrace();
 
             }
             adapter.notifyDataSetChanged();
@@ -126,7 +128,7 @@ public class SevenDActivity extends AppCompatActivity {
             public void onResponse(JSONArray response) {
                 Log.e("Response : ", String.valueOf(response));
                 FileManager fileManager = new FileManager();
-                fileManager.writeToFile("sevend.dat", String.valueOf(response), getApplicationContext());
+                fileManager.writeToFile("bongos.dat", String.valueOf(response), getApplicationContext());
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
@@ -159,7 +161,7 @@ public class SevenDActivity extends AppCompatActivity {
 
                     } catch (JSONException e) {
                         Log.e("Json Exception : ", e.getMessage());
-
+                        e.printStackTrace();
                         progressDialog.dismiss();
                     }
                 }
@@ -174,7 +176,6 @@ public class SevenDActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     //e.printStackTrace();
                 }
-
                 Log.e("Volley Error : ", error.toString());
                 progressDialog.dismiss();
 
@@ -187,10 +188,12 @@ public class SevenDActivity extends AppCompatActivity {
     }
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seven_d);
+        setContentView(R.layout.activity_bongos);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
@@ -200,9 +203,9 @@ public class SevenDActivity extends AppCompatActivity {
         }
         setSupportActionBar(toolbar);
 
-        this.setTitle("Edna Mall 7D Simulation");
+        this.setTitle("Edna Mall Game Zome");
         txttitle = findViewById(R.id.txtwelcome);
-        txttitle.setText("Edna Mall 7D Simulation");
+        txttitle.setText("Edna Mall Bob and Bongos");
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         albumList = new ArrayList<>();
@@ -210,7 +213,7 @@ public class SevenDActivity extends AppCompatActivity {
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new SevenDActivity.GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.addItemDecoration(new BongosActivity.GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
@@ -221,17 +224,13 @@ public class SevenDActivity extends AppCompatActivity {
         String img_url = "http://ednamall.co/images/banner.jpg";
 
 
-        Picasso.with(SevenDActivity.this).load(img_url).fit().centerInside()
-                .placeholder(R.drawable.ednamall)
-                .error(R.drawable.ednamall)
-                .into(imgbanner);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String shareBody = "Downlolad Edna Mall app From Google Play  : https://play.google.com/store/apps/details?id=com.ednamall.ednamall.ednamall2&hl=en";
+                String shareBody = "Download Edna Mall app From Google Play  : https://play.google.com/store/apps/details?id=com.ednamall.ednamall.edna&hl=en";
                 Intent sharingIntent = new Intent(Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Get Edna Mall App From Google Play ");
@@ -289,4 +288,5 @@ public class SevenDActivity extends AppCompatActivity {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
+
 }

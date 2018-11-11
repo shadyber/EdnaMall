@@ -1,4 +1,4 @@
-package com.ednamall.ednamall.ednamall2;
+package com.ednamall.ednamall.edna;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -7,7 +7,6 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -21,7 +20,6 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -39,20 +37,15 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import co.ednamall.ednamall.ednamall2.R;
+public class CommingActivity extends AppCompatActivity {
 
-public class NowshowingActivity extends AppCompatActivity {
-
-
-
-    String url ="http://ednamall.co/api/getnowshowing.php";
+String url ="http://ednamall.co/api/getcommingsoons.php";
 
 
     private RecyclerView recyclerView;
     private AlbumsAdapter adapter;
     private List<Album> albumList;
     public Animation animBounce;
-
 
 
 
@@ -75,7 +68,7 @@ public class NowshowingActivity extends AppCompatActivity {
 
     private void getofflineData() throws JSONException {
         FileManager fileManager = new FileManager();
-        String stringfile = fileManager.readFromFile("nowshowing.dat", getApplicationContext());
+        String stringfile = fileManager.readFromFile("commming.dat", getApplicationContext());
         JSONArray response = new JSONArray(stringfile);
 
         for (int i = 0; i < response.length(); i++) {
@@ -121,78 +114,77 @@ public class NowshowingActivity extends AppCompatActivity {
 
 
     }
-        private void getData() {
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("Loading...");
-            progressDialog.show();
+    private void getData() {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
 
-            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
-                @Override
-                public void onResponse(JSONArray response) {
-                    Log.e("Response : ", String.valueOf(response));
-                    FileManager fileManager = new FileManager();
-                    fileManager.writeToFile("nowshowing.dat", String.valueOf(response), getApplicationContext());
-                    for (int i = 0; i < response.length(); i++) {
-                        try {
-                            JSONObject jsonObject = response.getJSONObject(i);
-
-                            Album movie = new Album();
-                            movie.setName(jsonObject.getString("titiel"));
-                            movie.setGeners(jsonObject.getString("geners"));
-                            movie.setThumbnail(jsonObject.getString("image"));
-                            movie.setThumbnail_big(jsonObject.getString("image_big"));
-
-                            movie.setCasts(jsonObject.getString("casts"));
-                            movie.setDirector(jsonObject.getString("director"));
-                            movie.setShortDescription(jsonObject.getString("short_disc"));
-                            movie.setLongDescription(jsonObject.getString("description"));
-
-
-                            String videoId = "";
-                            try {
-                                String s = getVidioid(jsonObject.getString("youtubelink"));
-                                videoId = s.split("/embed/")[1];
-
-
-                            } catch (Exception ex) {
-
-                                Log.e("Error on Video ", ex.getMessage());
-getofflineData();
-
-                            }
-
-                            movie.setVideo(videoId);
-                            albumList.add(movie);
-                            adapter.notifyDataSetChanged();
-
-                        } catch (JSONException e) {
-                            Log.e("Json Exception : ", e.getMessage());
-
-                            progressDialog.dismiss();
-                        }
-                    }
-                    adapter.notifyDataSetChanged();
-                    progressDialog.dismiss();
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.e("Response : ", String.valueOf(response));
+                FileManager fileManager = new FileManager();
+                fileManager.writeToFile("commming.dat", String.valueOf(response), getApplicationContext());
+                for (int i = 0; i < response.length(); i++) {
                     try {
-                        getofflineData();
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        Album movie = new Album();
+                        movie.setName(jsonObject.getString("titiel"));
+                        movie.setGeners(jsonObject.getString("geners"));
+                        movie.setThumbnail(jsonObject.getString("image"));
+                        movie.setCasts(jsonObject.getString("casts"));
+                        movie.setDirector(jsonObject.getString("director"));
+                        movie.setShortDescription(jsonObject.getString("short_disc"));
+                        movie.setLongDescription(jsonObject.getString("description"));
+
+
+                        String videoId = "";
+                        try {
+                            String s = getVidioid(jsonObject.getString("youtubelink"));
+                            videoId = s.split("/embed/")[1];
+
+
+                        } catch (Exception ex) {
+
+                            Log.e("Error on Video ", ex.getMessage());
+
+
+                        }
+
+                        movie.setVideo(videoId);
+                        albumList.add(movie);
+                        adapter.notifyDataSetChanged();
+
                     } catch (JSONException e) {
-                        //e.printStackTrace();
+                        Log.e("Json Exception : ", e.getMessage());
+                        e.printStackTrace();
+                        progressDialog.dismiss();
                     }
-                    Log.e("Volley Error : ", error.toString());
-                    progressDialog.dismiss();
-
-
-
                 }
-            });
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
-            requestQueue.getCache();
-            requestQueue.add(jsonArrayRequest);
-        }
+                adapter.notifyDataSetChanged();
+                progressDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                try {
+                    getofflineData();
+                } catch (JSONException e) {
+                    //e.printStackTrace();
+                }
+                Log.e("Volley Error : ", error.toString());
+                progressDialog.dismiss();
+
+
+
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.getCache();
+        requestQueue.add(jsonArrayRequest);
+    }
+
 
 
 
@@ -200,7 +192,7 @@ getofflineData();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nowshowing);
+        setContentView(R.layout.activity_comming);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
@@ -209,9 +201,8 @@ getofflineData();
             window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         }
         setSupportActionBar(toolbar);
-        TextView txttitle=findViewById(R.id.txtwelcome);
-txttitle.setText("Now Showing at Edna Mall");
-        this.setTitle("Now Showing at Edna Mall");
+
+
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
@@ -220,28 +211,24 @@ txttitle.setText("Now Showing at Edna Mall");
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new NowshowingActivity.GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.addItemDecoration(new CommingActivity.GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
+        TextView txttitle=findViewById(R.id.txtwelcome);
+        txttitle.setText("Upcoming Movies to Edna Mall");
+        this.setTitle("Upcoming Movies to Edna Mall");
 
-        ImageView imgbanner=findViewById(R.id.imgbanner);
+
         getData();
 
-        String img_url = "http://ednamall.co/images/banner.jpg";
-
-
-        Picasso.with(NowshowingActivity.this).load(img_url).fit().centerInside()
-                .placeholder(R.drawable.ednamall)
-                .error(R.drawable.ednamall)
-                .into(imgbanner);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String shareBody = "Downlolad Edna Mall app From Google Play  : https://play.google.com/store/apps/details?id=com.ednamall.ednamall.ednamall2&hl=en";
+                String shareBody = "Download Edna Mall app From Google Play  : https://play.google.com/store/apps/details?id=com.ednamall.ednamall.edna&hl=en";
                 Intent sharingIntent = new Intent(Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Get Edna Mall App From Google Play ");

@@ -1,7 +1,8 @@
-package com.ednamall.ednamall.ednamall2;
+package com.ednamall.ednamall.edna;
 
+import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,26 +20,26 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import co.ednamall.ednamall.ednamall2.R;
-
 /**
  * Created by Ravi Tamada on 18/05/16.
  */
-public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.MyViewHolder> {
+public class PhonesAdapter extends RecyclerView.Adapter<PhonesAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<MainMenu> menuList;
+    private List<PhonesMenu> menuList;
+
 
     public Animation animBounce,animZoomin,animZoomout;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, count;
+        public TextView title, count, period;
         public ImageView thumbnail, overflow;
 
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
             count = (TextView) view.findViewById(R.id.count);
+            period = (TextView) view.findViewById(R.id.period);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
             overflow = (ImageView) view.findViewById(R.id.overflow);
 
@@ -46,7 +47,7 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.MyView
 
     }
 
-    public MainMenuAdapter(Context mContext, List<MainMenu> menuList) {
+    public PhonesAdapter(Context mContext, List<PhonesMenu> menuList) {
         this.mContext = mContext;
         this.menuList = menuList;
     }
@@ -54,7 +55,7 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.album_card, parent, false);
+                .inflate(R.layout.package_card, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -87,10 +88,51 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.MyView
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        MainMenu menulist = menuList.get(position);
+        final PhonesMenu menulist = menuList.get(position);
+
+
+      holder.itemView.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+
+              AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+
+              builder.setTitle("Confirm Action");
+              builder.setMessage("Your are Making Call For  "+menulist.getName()+"\n "+menulist.getPhoneNum());
+
+              builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                  public void onClick(DialogInterface dialog, int which) {
+
+                      Toast.makeText(mContext, "Calling "+menulist.getPhoneNum(), Toast.LENGTH_SHORT).show();
+                      PhoneCaller.MakeCall(menulist.getPhoneNum(),mContext);
+
+                      dialog.dismiss();
+                  }
+              });
+
+              builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                  @Override
+                  public void onClick(DialogInterface dialog, int which) {
+
+                      // Do nothing
+                      dialog.dismiss();
+                  }
+              });
+
+              AlertDialog alert = builder.create();
+              alert.show();
+
+
+
+
+          }
+      });
         holder.title.setText(menulist.getName());
 
-
+holder.count.setText(menulist.getPhoneNum());
+holder.period.setText(menulist.getPeriod());
 
         Picasso.with(mContext).load(menulist.getThumbnail()).fit().centerCrop()
                 .placeholder(R.drawable.placeholder)
@@ -98,39 +140,7 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.MyView
                 .into(holder.thumbnail);
 
 
-holder.overflow.setVisibility(View.INVISIBLE);
         setAnimation(holder.itemView, position);
-
-holder.thumbnail.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
- switch (holder.getLayoutPosition()){
-     case 0:
-         Intent intecomming =new Intent(mContext,CommingActivity.class);
-         mContext.startActivity(intecomming);
-         return;
-     case 1:
-         Intent intenetnow =new Intent(mContext,NowshowingActivity.class);
-         mContext.startActivity(intenetnow);
-         return;
-     case 2:
-         Intent intent7d =new Intent(mContext,SevenDActivity.class);
-         mContext.startActivity(intent7d);
-         return;
-     case 3:
-         Intent intentgames =new Intent(mContext,BongosActivity.class);
-         mContext.startActivity(intentgames);
-         return;
-
-     case 4:
-         Intent intentcontact =new Intent(mContext,ContactActivity.class);
-         mContext.startActivity(intentcontact);
- default:
-return;
- }
-
-    }
-});
 
 
 /*

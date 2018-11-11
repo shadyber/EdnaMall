@@ -1,4 +1,4 @@
-package com.ednamall.ednamall.ednamall2;
+package com.ednamall.ednamall.edna;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,8 +8,6 @@ import android.content.res.Resources;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -36,7 +34,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.ednamall.ednamall.ednamall2.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -88,21 +85,23 @@ private RecyclerView recyclerView;
 ImageView imgbanner=findViewById(R.id.imgbanner);
 
         prepareAlbums();
-        String img_url = "http://ednamall.co/images/banner.jpg";
+     //   String img_url = "http://ednamall.co/images/banner.jpg";
 
 
-        Picasso.with(MainActivity.this).load(img_url).fit().centerInside()
-                .placeholder(R.drawable.ednamall)
-                .error(R.drawable.ednamall)
-                .into(imgbanner);
+
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Share our app and invite your Friends", Snackbar.LENGTH_LONG)
-                        .setAction("Thank You", null).show();
+                String shareBody = "Download Edna Mall app From Google Play  : https://play.google.com/store/apps/details?id=com.ednamall.ednamall.edna&hl=en";
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Get Edna Mall App From Google Play ");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(sharingIntent, "Share This Massage Using "));
+
             }
         });
 
@@ -188,7 +187,7 @@ ImageView imgbanner=findViewById(R.id.imgbanner);
             startActivity(sd);
             return true;
         } else if (id == R.id.nav_share) {
-           String shareBody = "Downlolad Edna Mall app From Google Play  : https://play.google.com/store/apps/details?id=com.ednamall.ednamall.ednamall2&hl=en";
+           String shareBody = "Download Edna Mall app From Google Play  : https://play.google.com/store/apps/details?id=com.ednamall.ednamall.edna&hl=en";
           Intent  sharingIntent = new Intent(Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
             sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Get Edna Mall App From Google Play ");
@@ -196,7 +195,7 @@ ImageView imgbanner=findViewById(R.id.imgbanner);
             startActivity(Intent.createChooser(sharingIntent, "Share This Massage Using "));
 
         } else if (id == R.id.nav_send) {
-            String shareBody = "Downlolad Edna Mall app From Google Play  : https://play.google.com/store/apps/details?id=com.ednamall.ednamall.ednamall2&hl=en";
+            String shareBody = "Download Edna Mall app From Google Play  : https://play.google.com/store/apps/details?id=com.ednamall.ednamall.edna&hl=en";
             Intent  sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
             sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Get Edna Mall App From Google Play ");
@@ -204,6 +203,9 @@ ImageView imgbanner=findViewById(R.id.imgbanner);
             startActivity(Intent.createChooser(sharingIntent, "Share This Massage Using "));
 
         }
+
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
